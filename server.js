@@ -19,7 +19,7 @@ app.set('view engine', 'handlebars'); //use handlebars
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public'))); //middleware to direct to public folder
+app.use(express.static('public')); //middleware to direct to public folder
 
 // turn on routes
 app.use(routes);
