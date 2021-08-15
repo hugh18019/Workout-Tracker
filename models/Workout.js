@@ -3,5 +3,14 @@ const Schema = mongoose.Schema;
 
 const WorkoutSchema = new Schema({
   date: String,
-  totalWorkoutDuration: <Integer></Integer>,
+  exercises: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Exercise',
+    },
+  ],
 });
+
+const Workout = mongoose.model('Workout', WorkoutSchema);
+
+module.exports = Workout;
