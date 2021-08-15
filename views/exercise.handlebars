@@ -1,9 +1,21 @@
 <h3>Fitness Tracker</h3>
 {{!-- {{#if workouts.empty}} --}}
 <div class='card' style='width: 18rem;'>
-  <div class='card-body'>
-    <h5 class='card-title'>Add Your Exercise</h5>
-    <p class='card-text'>You have not created a workout yet!</p>
-    <a href='#' class='btn btn-primary create-wo-btn'>New workout</a>
-  </div>
+    <div class='card-body'>
+        <h5 class='card-title'>Add Your Exercise</h5>
+        <div class='dropdown'>
+            <button class='btn btn-secondary dropdown-toggle' type='button' id='dropdownMenuButton1'
+                data-bs-toggle='dropdown' aria-expanded='false'>
+                Exercise Type
+            </button>
+            <ul class='dropdown-menu' id="exercise-list" aria-labelledby='dropdownMenuButton1'>
+                <li><a class='dropdown-item' href='#'>Action</a></li>
+                <li><a class='dropdown-item' href='#'>Another action</a></li>
+                <li><a class='dropdown-item' href='#'>Something else here</a></li>
+            </ul>
+        </div>
+        <a href='#' class='btn btn-primary create-wo-btn'>New workout</a>
+    </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="js/exercise.js"></script>
