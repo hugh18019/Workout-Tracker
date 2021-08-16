@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const WorkoutSchema = new Schema({
-  date: String,
+  date: Date,
   exercises: [
     {
       type: Schema.Types.ObjectId,
