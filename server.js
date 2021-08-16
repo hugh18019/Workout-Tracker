@@ -24,9 +24,12 @@ app.use(express.static('public')); //middleware to direct to public folder
 // turn on routes
 app.use(routes);
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/populatedb', {
-  useNewUrlParser: true,
-});
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/workoutTracker_db',
+  {
+    useNewUrlParser: true,
+  }
+);
 
 // Start the server
 app.listen(PORT, () => {
