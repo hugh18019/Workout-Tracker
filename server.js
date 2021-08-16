@@ -17,8 +17,8 @@ const hbs = exphbs.create();
 app.engine('handlebars', hbs.engine); //use handlebars
 app.set('view engine', 'handlebars'); //use handlebars
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.json()); //middleware request object as json object
+app.use(express.urlencoded({ extended: true })); //middleware recognize request object as string/array
 app.use(express.static('public')); //middleware to direct to public folder
 
 // turn on routes

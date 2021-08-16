@@ -16,6 +16,16 @@ router.post('/', async (req, res) => {
       duration: req.body.duration,
     });
 
+    try {
+      const workoutData = await db.Workout.findOneAndUpdate(
+        { isCurrent: true },
+        { $push: { exercises: exerciseData.id } },
+        { new: true }
+      );
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
     // const exercise = exerciseData.get({ plain: true });
 
     res.status(200).json(exerciseData);
