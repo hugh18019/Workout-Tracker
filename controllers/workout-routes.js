@@ -27,4 +27,17 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.put('/', async (req, res) => {
+  try {
+    const lastWorkout = await db.Workout.findOneAndUpdate(
+      { isCurrent: true },
+      { isCurrent: false }
+    ).sort({ _id: -1 });
+    res.status(200).json(lastWorkout);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
