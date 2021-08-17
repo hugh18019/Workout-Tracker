@@ -1,4 +1,5 @@
 var createWorkoutBtn = document.querySelector('.create-wo-btn');
+var continueWorkoutBtn = document.querySelector('.continue-wo-btn');
 
 // var date = new Date().toLocaleDateString();
 // console.log(date);
