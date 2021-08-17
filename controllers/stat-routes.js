@@ -56,13 +56,42 @@ router.get('/lastSeven', async (req, res) => {
       },
       {
         $addFields: {
-          'Total Weights': {
+          total_duration: {
+            $sum: '$lookup-data.duration',
+          },
+          total_weights: {
             $sum: '$lookup-data.weights',
+          },
+          total_sets: {
+            $sum: '$lookup-data.sets',
+          },
+          total_reps: {
+            $sum: '$lookup-data.reps',
           },
         },
       },
       // { $project: { 'lookup-data': 0 } },
     ]);
+
+    lastSevenWorkoutObj = {
+      totalWorkoutDuration: 0,
+      exercisePerformed: 0,
+      totalWeightsLifted: 0,
+      totalSetsPerformed: 0,
+      totalRepsPerformed: 0,
+    };
+
+    for (let each of exer) {
+      console.log(each.exercises.length);
+      console.log(typeof each.exercises.length);
+      lastSevenWorkoutObj.totalWorkoutDuration += each.total_duration;
+      lastSevenWorkoutObj.exercisePerformed += each.exercises.length;
+      lastSevenWorkoutObj.totalWeightsLifted += each.total_weights;
+      lastSevenWorkoutObj.totalSetsPerformed += each.total_sets;
+      lastSevenWorkoutObj.totalRepsPerformed += each.total_reps;
+    }
+
+    console.log(lastSevenWorkoutObj);
 
     res.status(200).json(exer);
   } catch (err) {
