@@ -14,37 +14,6 @@ router.get('/', async (req, res) => {
 
 router.get('/lastSeven', async (req, res) => {
   try {
-    const workoutData = await db.Workout.find().sort('date').limit(7);
-    // console.log(workoutData);
-
-    // for (var each of workoutData) {
-    //   // each.exercises.aggregate([
-    //   //   { $group: { _id: null, amount: { $sum: '$weights' } } },
-    //   // ]);
-    //   for (let j of each.exercises) {
-    //     console.log(j);
-    //   }
-    // }
-
-    // const exer = workoutData[0].exercises;
-    // db.exer.aggregate([
-    //   {
-    //     $addFields: {
-    //       totalWeights: { $sum: '$weights' },
-    //     },
-    //   },
-    // ]);
-
-    // const exer = db.Exercise.aggregate([
-    //   {
-    //     $project: {
-    //       weights: {
-    //         $cond: { if: { $in: ['$id', workoutData[0].exercises] } },
-    //       },
-    //     },
-    //   },
-    // ]);
-
     const exer = await db.Workout.aggregate([
       {
         $lookup: {
@@ -70,7 +39,12 @@ router.get('/lastSeven', async (req, res) => {
           },
         },
       },
-      // { $project: { 'lookup-data': 0 } },
+      {
+        $sort: { date: -1 },
+      },
+      {
+        $limit: 7,
+      },
     ]);
 
     lastSevenWorkoutObj = {
@@ -91,7 +65,7 @@ router.get('/lastSeven', async (req, res) => {
       lastSevenWorkoutObj.totalRepsPerformed += each.total_reps;
     }
 
-    console.log(lastSevenWorkoutObj);
+    // console.log(lastSevenWorkoutObj);
 
     res.status(200).json(exer);
   } catch (err) {
