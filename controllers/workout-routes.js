@@ -12,6 +12,20 @@ router.get('/', async (req, res) => {
   }
 });
 
+// router.get('/lastSeven', async (req, res) => {
+//   try {
+//     const workoutData = await db.Workout.find().sort('date', -1).limit(7);
+//     for (var each of workoutData) {
+//       db.workoutData.exercises([
+//         { $group: { _id: null, amount: { $sum: '$weights' } } },
+//       ]);
+//     }
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json(err);
+//   }
+// });
+
 router.post('/', async (req, res) => {
   //   console.log('got here');
   console.log(req.body);
