@@ -40,6 +40,7 @@ async function handleAddExercise() {
   } else {
     console.log('Failed to create a new exercise');
   }
+  document.location.replace('/');
 }
 
 $('#complete-btn').on('click', handleAddExercise);
