@@ -40,7 +40,47 @@ async function handleAddExercise() {
   } else {
     console.log('Failed to create a new exercise');
   }
-  document.location.replace('/');
 }
 
-$('#complete-btn').on('click', handleAddExercise);
+// Resets input fields before adding a new exercise
+function resetInput() {
+  $('#dropdownMenuButton').text('Select an Exercise Type');
+  $('#NameInput')[0].value = '';
+  $('#WeightsInput')[0].value = '';
+  $('#SetsInput')[0].value = '';
+  $('#RepsInput')[0].value = '';
+  $('#DurationInput')[0].value = '';
+}
+
+$('#complete-btn').on('click', () => {
+  if (
+    $('#dropdownMenuButton').text() == 'Select an Exercise Type' ||
+    $('#NameInput')[0].value == '' ||
+    $('#WeightsInput')[0].value == null ||
+    $('#SetsInput')[0].value == null ||
+    $('#RepsInput')[0].value == null ||
+    $('#DurationInput')[0].value == null
+  ) {
+    alert('Please complete exercise info fields!');
+  } else {
+    handleAddExercise();
+    document.location.replace('/');
+  }
+});
+
+$('#new-exercise-btn').on('click', () => {
+  if (
+    $('#dropdownMenuButton').text() == 'Select an Exercise Type' ||
+    $('#NameInput')[0].value == '' ||
+    $('#WeightsInput')[0].value == null ||
+    $('#SetsInput')[0].value == null ||
+    $('#RepsInput')[0].value == null ||
+    $('#DurationInput')[0].value == null
+  ) {
+    console.log('got here');
+    alert('Please complete exercise info fields!');
+  } else {
+    handleAddExercise();
+    resetInput();
+  }
+});
