@@ -31,12 +31,18 @@ router.get('/', async (req, res) => {
       },
     ]);
 
-    await createLastSevenWorkoutObj();
-    await populateLastSevenWorkoutObj(lastSeven);
+    console.log(lastSeven);
 
-    console.log(lastSevenWorkoutObj);
+    if (lastSeven.length > 0) {
+      await createLastSevenWorkoutObj();
+      await populateLastSevenWorkoutObj(lastSeven);
+      console.log(lastSevenWorkoutObj);
+      res.render('home', { lastSevenWorkoutObj: lastSevenWorkoutObj });
+    } else {
+      res.render('home');
+    }
+
     // res.status(200).json(lastSevenWorkoutObj);
-    res.render('home', { lastSevenWorkoutObj: lastSevenWorkoutObj });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
